@@ -1,5 +1,14 @@
 var express = require('express');
+var bodyParser = require('body-parser');
+
 var app = express();
+
+// app.use(express.static(__dirname + '/public'));
+// app.use(bodyParser.urlencoded({extended: false}))
+
+var exphbs = require('express-handlebars');
+app.engine('handlebars', exphbs({defaultLayout: 'main'}));
+app.set('view engine', 'handlebars');
 
 var request = require('request');
 var cheerio = require('cheerio'); // Scrapes our html
@@ -16,10 +25,6 @@ db.on('error', function(err) {
   console.log('Database Error:', err);
 });
 
-// Main route (simple Hello World Message)
-app.get('/', function(req, res) {
-  res.send("Hello world");
-});
 
 // Retrieves data from usatoday collection
 app.get('/all', function(req, res){
