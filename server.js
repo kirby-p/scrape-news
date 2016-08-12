@@ -1,10 +1,12 @@
 var express = require('express');
 var bodyParser = require('body-parser');
+var path = require('path');
 
 var app = express();
 
 // app.use(express.static(__dirname + '/public'));
-// app.use(bodyParser.urlencoded({extended: false}))
+app.use(express.static(path.join(__dirname, 'public')));
+app.use(bodyParser.urlencoded({extended: false}))
 
 var exphbs = require('express-handlebars');
 app.engine('handlebars', exphbs({defaultLayout: 'main'}));
@@ -30,7 +32,7 @@ app.get('/', function(req, res){
 });
 
 // Retrieves data from usatoday collection
-app.get('/all', function(req, res){
+app.get('/news', function(req, res){
 	db.news.find({}, function(err, data){
 		if (err) throw err;
 
