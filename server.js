@@ -25,6 +25,9 @@ db.on('error', function(err) {
   console.log('Database Error:', err);
 });
 
+app.get('/', function(req, res){
+	res.render('index');
+});
 
 // Retrieves data from usatoday collection
 app.get('/all', function(req, res){
@@ -59,10 +62,10 @@ app.get('/scrape', function(req, res){
 					console.log(err);
 				}
 
-				// res.json(saved);
+				// res.send(saved);
 			});
 		});
-		console.log(results);
+		// console.log("These are the results:" + results);
 	});
 });
 
