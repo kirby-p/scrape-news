@@ -31,6 +31,28 @@ app.get('/', function(req, res){
 	res.render('index');
 });
 
+app.get('/comments', function(req, res){
+	db.news.find({}, function(err, data){
+		if (err) throw (err);
+
+		res.json(data);
+	})
+});
+
+app.get('/addcomment/:id', function(req, res){
+	db.news.update({
+		_id: mongojs.ObjectId(req.params.id)
+	}, {
+		$set: {
+			comments: "Check out my commenty comment"
+		}
+	},
+	function(err, data){
+		if(err) throw (err);
+	})
+});
+
+
 // Retrieves data from usatoday collection
 app.get('/news', function(req, res){
 	db.news.find({}, function(err, data){
