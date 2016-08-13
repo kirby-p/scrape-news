@@ -39,7 +39,7 @@ app.get('/comments', function(req, res){
 	})
 });
 
-app.get('/addcomment/:id', function(req, res){
+app.post('/addcomment/:id', function(req, res){
 	db.news.update({
 		_id: mongojs.ObjectId(req.params.id)
 	}, {
